@@ -35,6 +35,8 @@ function reportActionButtons()
     end
 end
 
+-------------------------General Stuff END ------------------------------------------
+
 --------------------------- Hunter Specified Stuff ------------------------------------------
 function AllinOne()
     class = UnitClass("target")
@@ -96,8 +98,6 @@ function HunterRota()
     AutoAttack()
 end 
 
-
-
 function ArcaneShot()
     if GetActionCooldown(70) == 0
     then
@@ -105,3 +105,5 @@ function ArcaneShot()
         cast("Arcane Shot")
     end
 end
+
+--------------------------- Hunter Specified Stuff END ------------------------------------------
