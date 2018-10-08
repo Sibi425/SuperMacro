@@ -1,4 +1,4 @@
----------------------------- General Stuff ---------------------------------------
+---------------------------- General stuff ---------------------------------------
 
 function CheckDebuffs()
     for i=1,2 do 
@@ -16,6 +16,15 @@ function AutoAttack()
         CastSpellByName("Auto Shot"); 
     end
 end
+
+function AutoAttackMelee()
+    if not IsAutoRepeatAction(72)
+    then 
+        UseAction(72)
+    end
+end
+
+
 
 function reportActionButtons()
     lActionSlot = 0;
@@ -35,9 +44,47 @@ function reportActionButtons()
     end
 end
 
--------------------------General Stuff END ------------------------------------------
+-------------------------General stuff END ------------------------------------------
 
---------------------------- Hunter Specified Stuff ------------------------------------------
+--------------------------- Rogue specified stuff --------------------------------------
+
+function AllinOneRogue()
+    if GetComboPoints() < 5
+    then
+        cast("Sinister Strike")
+    else 
+        cast("Eviscerate")
+    end
+
+end
+
+------------------------------Rogue specified stuff END-----------------------------------
+
+---------------------------------Paladin specified stuff -------------------
+function AllinOnePaladin()
+    if not buffed("Blessing of Might")
+    then
+        cast("Blessing of Might")
+    end
+    if not buffed("Seal of the Crusader") and not buffed("Judgement of the Crusader", "target")
+    then
+        cast("Seal of the Crusader")
+    elseif not buffed("Judgement of the Crusader", "target")
+    then 
+        cast("Judgement")
+    elseif not buffed("Seal of Righteousness")
+    then
+        cast("Seal of Righteousness")
+    elseif buffed("Seal of Righteousness")
+    then
+        cast("Judgement")
+    end
+    AutoAttackMelee()
+end
+
+-------------------------------Paladin specified stuff END --------------------------------------
+
+--------------------------- Hunter specified stuff ------------------------------------------
 function AllinOne()
     class = UnitClass("target")
     UIErrorsFrame:Hide()
@@ -106,4 +153,4 @@ function ArcaneShot()
     end
 end
 
---------------------------- Hunter Specified Stuff END ------------------------------------------
+--------------------------- Hunter specified stuff END ------------------------------------------
