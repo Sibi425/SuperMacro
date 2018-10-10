@@ -1,4 +1,8 @@
 ---------------------------- General stuff ---------------------------------------
+function hallo()
+    critChance = GetCritChance() 
+    Print(critChance)
+end
 
 function CheckDebuffs()
     for i=1,2 do 
@@ -20,7 +24,7 @@ end
 function AutoAttackMelee()
     if not IsAutoRepeatAction(72)
     then 
-        UseAction(72)
+        CastSpellByName("d")
     end
 end
 
@@ -62,10 +66,14 @@ end
 
 ---------------------------------Paladin specified stuff -------------------
 function AllinOnePaladin()
-    if not buffed("Blessing of Might")
+    if not buffed("Blessing of Might") and UnitMana("player")>200
     then
         cast("Blessing of Might")
+    elseif not buffed("Blessing of Wisdom") and UnitMana("player")<200
+    then
+        cast("Blessing of Wisdom")
     end
+
     if not buffed("Seal of the Crusader") and not buffed("Judgement of the Crusader", "target")
     then
         cast("Seal of the Crusader")
@@ -79,13 +87,12 @@ function AllinOnePaladin()
     then
         cast("Judgement")
     end
-    AutoAttackMelee()
 end
 
 -------------------------------Paladin specified stuff END --------------------------------------
 
 --------------------------- Hunter specified stuff ------------------------------------------
-function AllinOne()
+function AllinOneHunter()
     class = UnitClass("target")
     UIErrorsFrame:Hide()
         if (not PlayerFrame.inCombat)
